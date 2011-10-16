@@ -84,9 +84,9 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 
 	private void analyzeUserspace() {
 		if (machineDescriptor.hasJavaRunning()) {
-			builder.append("Having JVM running with system dominated by userspace: "
-					+ "first a look at your GC behaviour through GC logs. "
-					+ "If it's behaving correctly, then have a look inside your app\n");
+			builder.append("Having JVM running with system dominated by userspace: \n"
+					+ "1) have a look at your GC behaviour through GC logs.\n"
+					+ "2) If it's behaving correctly, then have a look inside your app.\n");
 		}
 		analyzeCpuThreads();
 	}
