@@ -8,7 +8,7 @@ import net.batmat.vmstatanalyzer.model.VmstatData;
 public class SimpleAnalyzer implements VmstatAnalyzer {
 
 	private static final int DEFAULT_CPU_COUNT = 4;
-	private static final int MAX_LINE_COUNT = 20;
+	private static final int MAX_LINE_COUNT = 50;
 	private final VmstatData data;
 	private final StringBuilder builder;
 
@@ -26,9 +26,9 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 		machineDescriptor = descriptor;
 		builder = new StringBuilder();
 		if (data.getLineCount() > MAX_LINE_COUNT) {
-			builder.append("WARNING: line count to be analyzed is too big (max=" + MAX_LINE_COUNT + ".\n"
-					+ "You'd better select a shorter period, something like using 'vmstat 3' and selecting "
-					+ MAX_LINE_COUNT + " when you know the system is having issues reported against it");
+			builder.append("WARNING: line count to be analyzed is too big (max=" + MAX_LINE_COUNT + ").\n"
+					+ "You'd better select a shorter period, something like using 'vmstat 3 20' and selecting "
+					+ MAX_LINE_COUNT + " when you know the system is having issues reported against it.\n");
 		}
 	}
 
