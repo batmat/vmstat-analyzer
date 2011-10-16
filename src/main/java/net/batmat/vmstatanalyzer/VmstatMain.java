@@ -1,5 +1,6 @@
 package net.batmat.vmstatanalyzer;
 
+import java.io.File;
 import java.io.IOException;
 
 import net.batmat.vmstatanalyzer.model.DefaultVmstatDataLoader;
@@ -9,21 +10,24 @@ import net.batmat.vmstatanalyzer.model.VmstatDataLoader;
 import net.batmat.vmstatanalyzer.simpleanalyzer.SimpleAnalyzer;
 
 public class VmstatMain {
-
-	/**
-	 * @param args
-	 * @throws IOException 
-	 */
 	public static void main(String[] args) throws IOException {
-//		VmstatDataLoader loader = new DefaultVmstatDataLoader("C:/Users/mathus/Dropbox/mipih/01_projets_en_cours/09-tests-perf-marches/marches-perf-jmeter/40users-etape2/vmstat-40users-simple.txt");
-		VmstatDataLoader loader = new DefaultVmstatDataLoader("vmstat-1.txt");
+		if (args.length != 1) {
+			System.err.println("Usage: command vmstatFilePath");
+			System.exit(1);
+		}
+		String vmstatFilePath = args[0];
+		File vmstatFile = new File(vmstatFilePath);
+		if (!(vmstatFile.exists() && vmstatFile.canRead())) {
+			System.err.println("Unable to find or read " + vmstatFilePath);
+			System.exit(2);
+		}
+		VmstatDataLoader loader = new DefaultVmstatDataLoader(vmstatFilePath);
 		VmstatData data = loader.getData();
-		
+
 		System.out.println(data);
-		
+
 		VmstatAnalyzer analyzer = new SimpleAnalyzer(data);
 		System.out.println("Result");
 		System.out.println(analyzer.getReport());
 	}
-
 }

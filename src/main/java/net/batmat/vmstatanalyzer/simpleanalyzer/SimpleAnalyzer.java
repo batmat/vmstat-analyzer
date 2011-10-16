@@ -40,7 +40,6 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 		case USERSPACE:
 			analyzeUserspace();
 		}
-		System.out.println(builder.toString());
 		return builder.toString();
 	}
 
