@@ -1,5 +1,6 @@
 package net.batmat.vmstatanalyzer.simpleanalyzer;
 
+import net.batmat.vmstatanalyzer.model.EnvironmentDescriptor;
 import net.batmat.vmstatanalyzer.model.Stats;
 import net.batmat.vmstatanalyzer.model.VmstatAnalyzer;
 import net.batmat.vmstatanalyzer.model.VmstatData;
@@ -11,15 +12,15 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 	private final VmstatData data;
 	private final StringBuilder builder;
 
-	MachineDescriptor machineDescriptor;
+	EnvironmentDescriptor machineDescriptor;
 
 	public SimpleAnalyzer(VmstatData data) {
-		this(data, new MachineDescriptor(DEFAULT_CPU_COUNT));
+		this(data, new EnvironmentDescriptor(DEFAULT_CPU_COUNT, true));
 		builder.append("WARNING: Default CPU count (" + DEFAULT_CPU_COUNT
 				+ ") is being used. Specify your actual number to have better results.\n");
 	}
 
-	public SimpleAnalyzer(VmstatData data, MachineDescriptor descriptor) {
+	public SimpleAnalyzer(VmstatData data, EnvironmentDescriptor descriptor) {
 		// TODO : assert that minimum columns are present
 		this.data = data;
 		machineDescriptor = descriptor;
@@ -34,10 +35,9 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 	public String getReport() {
 		Dominance dominance = findDominatingConsumer();
 		assert dominance != null;
-		switch (dominance) {
-		case SYSTEM:
+		if (Dominance.SYSTEM.equals(dominance)) {
 			analyzeSystem();
-		case USERSPACE:
+		} else if (Dominance.USERSPACE.equals(dominance)) {
 			analyzeUserspace();
 		}
 		return builder.toString();
@@ -83,6 +83,11 @@ public class SimpleAnalyzer implements VmstatAnalyzer {
 	}
 
 	private void analyzeUserspace() {
+		if (machineDescriptor.hasJavaRunning()) {
+			builder.append("Having JVM running with system dominated by userspace: "
+					+ "first a look at your GC behaviour through GC logs. "
+					+ "If it's behaving correctly, then have a look inside your app\n");
+		}
 		analyzeCpuThreads();
 	}
 
