@@ -1,9 +1,9 @@
 package net.batmat.vmstatanalyzer;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import junit.framework.TestSuite;
 
 import net.batmat.vmstatanalyzer.model.DefaultVmstatDataLoader;
 import net.batmat.vmstatanalyzer.model.VmstatAnalyzer;
@@ -12,8 +12,6 @@ import net.batmat.vmstatanalyzer.model.VmstatDataLoader;
 import net.batmat.vmstatanalyzer.simpleanalyzer.SimpleAnalyzer;
 
 import org.junit.Test;
-
-import static org.fest.assertions.Assertions.*;
 public class VmstatTest {
 	@Test
 	public void testUserDominance() throws Exception {

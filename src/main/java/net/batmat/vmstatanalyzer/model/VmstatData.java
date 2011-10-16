@@ -32,6 +32,10 @@ public class VmstatData {
 
 	public String[] getValuesFor(String title) {
 		int index = findColumnIndex(title);
+		if(index==-1)
+		{
+			return null;
+		}
 		String[] result = new String[values.length];
 		int i=0;
 		for(String[] v:values)
@@ -41,6 +45,11 @@ public class VmstatData {
 		return result;
 	}
 
+	/**
+	 * Finds index for given column. Returns -1 if not found.
+	 * @param title the column title.
+	 * @return index for given column. -1 if not found.
+	 */
 	private int findColumnIndex(String title) {
 		int index = 0;
 		for (String t : titles) {
@@ -49,6 +58,14 @@ public class VmstatData {
 			}
 			index++;
 		}
-		throw new IllegalArgumentException(""+title+" column was not found.");
+		return -1;
+	}
+	public boolean hasColumn(String title)
+	{
+		return findColumnIndex(title) != -1;
+	}
+
+	public int getLineCount() {
+		return values.length;
 	}
 }
