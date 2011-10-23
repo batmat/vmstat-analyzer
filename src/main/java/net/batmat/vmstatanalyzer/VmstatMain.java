@@ -6,11 +6,12 @@ import java.io.IOException;
 import net.batmat.vmstatanalyzer.model.DefaultVmstatDataLoader;
 import net.batmat.vmstatanalyzer.model.VmstatAnalyzer;
 import net.batmat.vmstatanalyzer.model.VmstatData;
+import net.batmat.vmstatanalyzer.model.VmstatDataFormatException;
 import net.batmat.vmstatanalyzer.model.VmstatDataLoader;
 import net.batmat.vmstatanalyzer.simpleanalyzer.SimpleAnalyzer;
 
 public class VmstatMain {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, VmstatDataFormatException {
 		if (args.length != 1) {
 			System.err.println("Usage: command vmstatFilePath");
 			System.exit(1);
@@ -22,12 +23,17 @@ public class VmstatMain {
 			System.exit(2);
 		}
 		VmstatDataLoader loader = new DefaultVmstatDataLoader(vmstatFilePath);
-		VmstatData data = loader.getData();
-
-		System.out.println(data);
-
-		VmstatAnalyzer analyzer = new SimpleAnalyzer(data);
-		System.out.println("Result");
-		System.out.println(analyzer.getReport());
+		VmstatData data;
+		try {
+			data = loader.getData();
+			System.out.println(data);
+			VmstatAnalyzer analyzer = new SimpleAnalyzer(data);
+			System.out.println("Result:");
+			System.out.println(analyzer.getReport());
+		} catch (VmstatDataFormatException e) {
+			System.err.println("Given vmstat format not supported");
+			e.printStackTrace();
+			System.exit(3);
+		}
 	}
 }

@@ -1,7 +1,8 @@
 package net.batmat.vmstatanalyzer.model;
 
-import java.io.IOException;
-
+/**
+ * Implementors must support having lines beginning with # ignored.
+ */
 public interface VmstatDataLoader {
-	VmstatData getData() throws IOException;
+	VmstatData getData() throws VmstatDataFormatException;
 }
