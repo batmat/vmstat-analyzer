@@ -1,6 +1,7 @@
 package net.batmat.vmstatanalyzer.model;
 
 import static org.fest.assertions.Assertions.assertThat;
+import net.batmat.vmstatanalyzer.core.model.Stats;
 
 import org.junit.Test;
 

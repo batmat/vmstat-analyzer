@@ -1,9 +1,9 @@
-package net.batmat.vmstatanalyzer.simpleanalyzer;
+package net.batmat.vmstatanalyzer.core.analyzer.simpleanalyzer;
 
-import net.batmat.vmstatanalyzer.model.EnvironmentDescriptor;
-import net.batmat.vmstatanalyzer.model.Stats;
-import net.batmat.vmstatanalyzer.model.VmstatAnalyzer;
-import net.batmat.vmstatanalyzer.model.VmstatData;
+import net.batmat.vmstatanalyzer.core.analyzer.EnvironmentDescriptor;
+import net.batmat.vmstatanalyzer.core.analyzer.VmstatAnalyzer;
+import net.batmat.vmstatanalyzer.core.model.Stats;
+import net.batmat.vmstatanalyzer.core.model.VmstatData;
 
 public class SimpleAnalyzer implements VmstatAnalyzer {
 

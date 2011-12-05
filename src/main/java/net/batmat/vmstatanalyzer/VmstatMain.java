@@ -3,12 +3,12 @@ package net.batmat.vmstatanalyzer;
 import java.io.File;
 import java.io.IOException;
 
-import net.batmat.vmstatanalyzer.model.DefaultVmstatDataLoader;
-import net.batmat.vmstatanalyzer.model.VmstatAnalyzer;
-import net.batmat.vmstatanalyzer.model.VmstatData;
-import net.batmat.vmstatanalyzer.model.VmstatDataFormatException;
-import net.batmat.vmstatanalyzer.model.VmstatDataLoader;
-import net.batmat.vmstatanalyzer.simpleanalyzer.SimpleAnalyzer;
+import net.batmat.vmstatanalyzer.core.analyzer.VmstatAnalyzer;
+import net.batmat.vmstatanalyzer.core.analyzer.simpleanalyzer.SimpleAnalyzer;
+import net.batmat.vmstatanalyzer.core.loader.DefaultVmstatDataLoader;
+import net.batmat.vmstatanalyzer.core.loader.VmstatDataFormatException;
+import net.batmat.vmstatanalyzer.core.loader.VmstatDataLoader;
+import net.batmat.vmstatanalyzer.core.model.VmstatData;
 
 public class VmstatMain {
 	public static void main(String[] args) throws IOException, VmstatDataFormatException {

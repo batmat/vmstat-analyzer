@@ -1,4 +1,4 @@
-package net.batmat.vmstatanalyzer.model;
+package net.batmat.vmstatanalyzer.core.model;
 
 import java.util.Arrays;
 

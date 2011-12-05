@@ -1,11 +1,11 @@
-package net.batmat.vmstatanalyzer.model;
+package net.batmat.vmstatanalyzer.core.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 // TODO : improve data model, anemic seems stupid here. There has to be a better way.
-class VmstatDataImpl implements VmstatData {
+public class VmstatDataImpl implements VmstatData {
 	String[] titles;
 	String[][] values;
 
